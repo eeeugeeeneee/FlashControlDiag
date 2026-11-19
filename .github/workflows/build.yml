@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Extract project
-        run: unzip -q "FlashControlDiag(4).zip"
+        run: unzip -q "FlashControlDiag(1).zip"
 
       - uses: actions/setup-java@v4
         with:
