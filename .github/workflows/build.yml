@@ -19,7 +19,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - uses: android-actions/setup-android@v3
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
 
       - name: Install SDK
         run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
@@ -28,9 +31,11 @@ jobs:
         working-directory: FlashControlDiag
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew --no-daemon assembleDebug
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: FlashControlDiag-apk
           path: FlashControlDiag/app/build/outputs/apk/debug/app-debug.apk
+          
